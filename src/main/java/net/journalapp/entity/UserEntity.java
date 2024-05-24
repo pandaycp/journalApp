@@ -1,4 +1,4 @@
-package net.engineeringdigest.journalApp.entity;
+package net.journalapp.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @Document(collection = "users")
 @Data
 @NoArgsConstructor
-public class User {
+public class UserEntity {
     @Id
     private ObjectId id;
 

@@ -1,5 +1,6 @@
-package net.engineeringdigest.journalApp;
+package net.journalapp;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -14,12 +15,13 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableTransactionManagement
+@Slf4j
 public class JournalApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(JournalApplication.class, args);
 		Environment env = ctx.getEnvironment();
-		System.out.println(Arrays.stream(env.getActiveProfiles()).toArray()[1]);
+		log.info("Environment Profiles {}", Arrays.stream(env.getActiveProfiles()).toArray()[1]);
 	}
 
 	@Bean

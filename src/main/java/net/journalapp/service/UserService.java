@@ -1,17 +1,14 @@
-package net.engineeringdigest.journalApp.service;
+package net.journalapp.service;
 
 import lombok.extern.slf4j.Slf4j;
-import net.engineeringdigest.journalApp.entity.JournalEntry;
-import net.engineeringdigest.journalApp.entity.User;
-import net.engineeringdigest.journalApp.repository.JournalEntryRepo;
-import net.engineeringdigest.journalApp.repository.UserRepository;
+import net.journalapp.entity.UserEntity;
+import net.journalapp.model.User;
+import net.journalapp.repository.UserRepository;
 import org.bson.types.ObjectId;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -33,7 +30,9 @@ public class UserService {
         try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(Arrays.asList("ADMIN"));
-            userRepository.save(user);
+            UserEntity userEntity = new UserEntity();
+            BeanUtils.copyProperties(user, userEntity);
+            userRepository.save(userEntity);
             return true;
         }catch (Exception e){
             log.error("hahahhahahha");
@@ -53,25 +52,32 @@ public class UserService {
     }
 
     public  void saveUser(User user){
-        userRepository.save(user);
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(user, userEntity);
+        userRepository.save(userEntity);
     }
 
     public void saveAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER", "ADMIN"));
-        userRepository.save(user);
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(user, userEntity);
+        userRepository.save(userEntity);
     }
 
-    public List<User> getAll(){
+    public List<UserEntity> getAll(){
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(ObjectId id){
+    public Optional<UserEntity> findById(ObjectId id){
         return userRepository.findById(String.valueOf(id));
     }
 
     public User findByUserName(String userName){
-        return userRepository.findByUserName(userName);
+        UserEntity userEntity = userRepository.findByUserName(userName);
+        User user = new User();
+        BeanUtils.copyProperties(userEntity, new User());
+        return user;
     }
 
     public void deleteById(ObjectId id){

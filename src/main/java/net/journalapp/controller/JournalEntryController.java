@@ -1,6 +1,6 @@
-package net.engineeringdigest.journalApp.controller;
+package net.journalapp.controller;
 
-import net.engineeringdigest.journalApp.entity.JournalEntry;
+import net.journalapp.entity.JournalEntry;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

@@ -1,21 +1,19 @@
-package net.engineeringdigest.journalApp.service;
+package net.journalapp.service;
 
-import net.engineeringdigest.journalApp.entity.User;
-import net.engineeringdigest.journalApp.repository.UserRepository;
+import net.journalapp.entity.UserEntity;
+import net.journalapp.model.User;
+import net.journalapp.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.ActiveProfiles;
 
 
 @SpringBootTest
 @ActiveProfiles("dev")
-public class UserServiceTest {
+public class UserEntityServiceTest {
 
     @Autowired
     private UserRepository userRepository;

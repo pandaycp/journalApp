@@ -1,7 +1,8 @@
-package net.engineeringdigest.journalApp.controller;
+package net.journalapp.controller;
 
-import net.engineeringdigest.journalApp.entity.User;
-import net.engineeringdigest.journalApp.service.UserService;
+import net.journalapp.entity.UserEntity;
+import net.journalapp.model.User;
+import net.journalapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class AdminController {
 
     @GetMapping("/all-users")
     public ResponseEntity<?> getAllUsers(){
-        List<User> allUsers = userService.getAll();
+        List<UserEntity> allUsers = userService.getAll();
         if(allUsers != null && !allUsers.isEmpty()){
             return new ResponseEntity<>(allUsers, HttpStatus.OK);
         }
